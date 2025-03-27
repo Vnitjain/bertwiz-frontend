@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   checked: {
-    backgroundColor: 'black',
+    backgroundColor: 'skyblue',
   },
   unchecked: {
     backgroundColor: 'white',

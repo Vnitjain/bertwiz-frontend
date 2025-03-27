@@ -4,7 +4,17 @@ import CheckBox from "./CheckBox";
 import { LineChart } from "react-native-chart-kit";
 
 const data = {
-  labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  labels: (() => {
+    const today = new Date();
+    const labels = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
+      const day = date.getDate();
+      const month = date.toLocaleString('default', { month: 'short' });
+      labels.unshift(`${day} ${month}`);
+    }
+    return labels;
+  })(),
   datasets: [
     {
       data: [120, 122, 118, 124, 126, 130, 128],
@@ -64,7 +74,7 @@ const MedicalInfoCards = () => {
               value={dataset.visible}
               onValueChange={() => toggleVisibility(dataset.name)}
             />
-            <Text>{dataset.name}</Text>
+            <Text style={{ color: dataset.color(1) }}>{dataset.name}</Text>
           </View>
         ))}
       </View>
